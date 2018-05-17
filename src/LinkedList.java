@@ -1,3 +1,4 @@
+import sun.util.resources.cldr.pt.CurrencyNames_pt_PT;
 
 /**
  * @author Jill Xu
@@ -5,6 +6,7 @@
  */
 public class LinkedList {
 	private Node head;
+	private Node tail;
 	private Node current;// this will have current value
 	public int count;
 
@@ -43,7 +45,7 @@ public class LinkedList {
 
 	}
 
-	public boolean removeAt(int index) {
+	public boolean removeAt(int index) { // remove the node at the index
 		Node removeNode = new Node();
 		current = head;
 		for (int i = count - 1; i >= 0; i--) {
@@ -59,7 +61,7 @@ public class LinkedList {
 		return false;
 	}
 
-	public void printReverse() {
+	public void printReverse() { // reverse the linked list and print out
 		current = head;
 		Node previous = null;
 		while (current != null) {
@@ -80,12 +82,29 @@ public class LinkedList {
 		System.out.println("NULL");
 	}
 
-	public boolean insertAt(int index, Object o) {
-		return false;
-
+	public boolean insertAt(int index, Object o) {// add an object to the linked list
+		
+		
+		if(index == 0) {
+			this.addAtStart(o);
+		}else {
+			Node insert = new Node(); // the node to be inserted;
+			current = head; // used for storing temp node; 
+			insert.value = o;
+			
+			for(int i=1; i<=index; i++) {
+				current = current.next;
+			}
+			
+			insert.next = current.next;
+			current.next = insert;
+			count++;
+		}
+		
+		return true;
 	}
 
-	public void printAllNodes() {
+	public void printAllNodes() { // print the linked list
 		System.out.println("Head -->");
 		Node curr = head;
 		while (curr.next != null) {
